@@ -1,0 +1,26 @@
+name: Publish NPM Package
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Determine if new version
+        run: |
+         if git diff HEAD^ HEAD package.json | grep version > /dev/null; then
+         echo "::set-output name=should_publish::true"
+         else
+         echo "::set-output name=should_publish::false"
+         fi
+        id: check_version
+      - name: Publish package to npmjs.org
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}" > .npmrc
+          npm publish --access public
+        if: steps.check_version.outputs.should_publish == 'true'
