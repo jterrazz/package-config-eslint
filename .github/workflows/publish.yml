@@ -1,26 +1,29 @@
-name: Publish NPM Package
+name: Publish to NPM
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  build-and-publish:
+  publish:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@myorg'
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Determine if new version
-        run: |
-         if git diff HEAD^ HEAD package.json | grep version > /dev/null; then
-         echo "::set-output name=should_publish::true"
-         else
-         echo "::set-output name=should_publish::false"
-         fi
-        id: check_version
-      - name: Publish package to npmjs.org
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}" > .npmrc
-          npm publish --access public
-        if: steps.check_version.outputs.should_publish == 'true'
+
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+        run: yarn publish --access public
