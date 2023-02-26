@@ -20,6 +20,10 @@ module.exports = {
                 semi: true,
                 singleQuote: true,
                 trailingComma: 'all',
+                tabWidth: 4,
+                useTabs: false,
+                printWidth: 120,
+                'editor.formatOnSave': true,
             },
         ],
         'sort-imports-es6-autofix/sort-imports-es6': [
