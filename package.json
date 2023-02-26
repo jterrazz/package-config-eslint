@@ -1,6 +1,6 @@
 {
   "name": "@jterrazz/eslint-config-common",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "main": "index.js",
   "repository": "git@github.com:jterrazz/eslint-config-common.git",
   "author": "Jean-Baptiste Terrazzoni <jterrazz@icloud.com>",

@@ -22,7 +22,7 @@ module.exports = {
                 trailingComma: 'all',
                 tabWidth: 4,
                 useTabs: false,
-                printWidth: 120,
+                printWidth: 100,
                 'editor.formatOnSave': true,
             },
         ],
