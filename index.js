@@ -11,7 +11,7 @@ module.exports = {
     plugins: [
         '@typescript-eslint',
         'sort-keys-fix',
-        'sort-imports-es6-autofix',
+        'simple-import-sort'
     ],
     rules: {
         'prettier/prettier': [
@@ -26,15 +26,31 @@ module.exports = {
                 'editor.formatOnSave': true,
             },
         ],
-        'sort-imports-es6-autofix/sort-imports-es6': [
-            'warn',
-            {
-                ignoreCase: false,
-                ignoreMemberSort: false,
-                memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-            },
-        ],
         'sort-keys-fix/sort-keys-fix': 'warn',
         'sort-vars': 'error',
+        'simple-import-sort/imports': [
+            'error',
+            {
+                'groups': [
+                    // External packages
+                    ['^react', '^@?\\w'],
+
+                    // Internal architecture.
+                    ['^@configuration(/.*|$)', '/configuration(?!/?$)', '/configuration/?$'],
+                    ['^@application(/.*|$)', '/application(?!/?$)', '/application/?$'],
+                    ['^@domain(/.*|$)', '/domain(?!/?$)', '/domain/?$'],
+                    ['^@ports(/.*|$)', '/ports(?!/?$)', '/ports/?$'],
+                    ['^@adapters(/.*|$)', '/adapters(?!/?$)', '/adapters/?$'],
+                    ['^@infrastructure(/.*|$)', '/infrastructure(?!/?$)', '/infrastructure/?$'],
+
+                    // Parent imports. Put `..` last.
+                    ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+                    // Other relative imports. Put same-folder imports and `.` last.
+                    ['^\\./(?=.*/)(?!/?$)', '^\\\\.(?!/?$)", "^\\\\./?$'],
+                    // Style imports.
+                    ['^.+\\.?(css)$']
+                ]
+            }
+        ]
     },
 };
