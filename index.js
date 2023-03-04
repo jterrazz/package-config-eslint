@@ -11,9 +11,11 @@ module.exports = {
     plugins: [
         '@typescript-eslint',
         'sort-keys-fix',
-        'simple-import-sort'
+        'simple-import-sort',
+        'unused-imports'
     ],
     rules: {
+        // Prettier
         'prettier/prettier': [
             'warn',
             {
@@ -26,8 +28,22 @@ module.exports = {
                 'editor.formatOnSave': true,
             },
         ],
+
+        // Forbid unused variables and imports
+        "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+        ],
+
+        // Sorting keys in objects
         'sort-keys-fix/sort-keys-fix': 'warn',
+
+        // Sorting variables
         'sort-vars': 'error',
+
+        // Sorting imports
         'simple-import-sort/imports': [
             'error',
             {
@@ -42,6 +58,7 @@ module.exports = {
                     ['^@ports(/.*|$)', '/ports(?!/?$)', '/ports/?$'],
                     ['^@adapters(/.*|$)', '/adapters(?!/?$)', '/adapters/?$'],
                     ['^@infrastructure(/.*|$)', '/infrastructure(?!/?$)', '/infrastructure/?$'],
+                    ['^@utils(/.*|$)', '/utils(?!/?$)', '/utils/?$'],
 
                     // Parent imports. Put `..` last.
                     ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
