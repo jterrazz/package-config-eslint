@@ -12,7 +12,8 @@ module.exports = {
         '@typescript-eslint',
         'sort-keys-fix',
         'simple-import-sort',
-        'unused-imports'
+        'unused-imports',
+        'unicorn'
     ],
     rules: {
         // Prettier
