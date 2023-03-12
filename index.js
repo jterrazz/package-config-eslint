@@ -3,6 +3,9 @@ module.exports = {
         'next/core-web-vitals',
         'plugin:@typescript-eslint/recommended',
         'plugin:prettier/recommended',
+        'plugin:promise/recommended',
+        'plugin:sonarjs/recommended',
+        'plugin:jest/recommended',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -13,8 +16,14 @@ module.exports = {
         'sort-keys-fix',
         'simple-import-sort',
         'unused-imports',
-        'unicorn'
+        'unicorn',
+        'promise',
+        'jest',
+        'sonarjs',
     ],
+    env: {
+        'jest/globals': true,
+    },
     rules: {
         // Prettier
         'prettier/prettier': [
@@ -66,9 +75,9 @@ module.exports = {
                     // Other relative imports. Put same-folder imports and `.` last.
                     ['^\\./(?=.*/)(?!/?$)', '^\\\\.(?!/?$)", "^\\\\./?$'],
                     // Style imports.
-                    ['^.+\\.?(css)$']
-                ]
-            }
-        ]
+                    ['^.+\\.?(css)$'],
+                ],
+            },
+        ],
     },
 };
