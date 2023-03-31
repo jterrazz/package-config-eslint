@@ -1,3 +1,5 @@
+const prettierConfig = require('./.prettierrc');
+
 module.exports = {
     extends: [
         'next/core-web-vitals',
@@ -26,26 +28,24 @@ module.exports = {
     },
     rules: {
         // Prettier
-        'prettier/prettier': [
+        'prettier/prettier': ['warn', prettierConfig],
+
+        // Forbid unused variables and imports
+        'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+        'unused-imports/no-unused-imports': 'error',
+        'unused-imports/no-unused-vars': [
             'warn',
             {
-                semi: true,
-                singleQuote: true,
-                trailingComma: 'all',
-                tabWidth: 4,
-                useTabs: false,
-                printWidth: 100,
-                'editor.formatOnSave': true,
+                vars: 'all',
+                varsIgnorePattern: '^_',
+                args: 'after-used',
+                argsIgnorePattern: '^_',
             },
         ],
 
-        // Forbid unused variables and imports
-        "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
-        "unused-imports/no-unused-imports": "error",
-        "unused-imports/no-unused-vars": [
-            "warn",
-            { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
-        ],
+        // Safety
+        'require-await': 'error',
+        'no-return-await': 'error',
 
         // Sorting keys in objects
         'sort-keys-fix/sort-keys-fix': 'warn',
@@ -57,7 +57,7 @@ module.exports = {
         'simple-import-sort/imports': [
             'error',
             {
-                'groups': [
+                groups: [
                     // External packages
                     ['^react', '^@?\\w'],
 
