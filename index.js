@@ -52,7 +52,7 @@ module.exports = {
         ],
 
         // Safety
-        'require-await': 'error',
+        '@typescript-eslint/no-floating-promises': 'error',
         'no-return-await': 'error',
 
         // Sorting keys in objects
