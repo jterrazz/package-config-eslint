@@ -1,5 +1,3 @@
-const prettierConfig = require('./.prettierrc');
-
 module.exports = {
     extends: [
         'next/core-web-vitals',
@@ -28,7 +26,17 @@ module.exports = {
     },
     rules: {
         // Prettier
-        'prettier/prettier': ['warn', prettierConfig],
+        'prettier/prettier': [
+            'warn',
+            {
+                semi: true,
+                singleQuote: true,
+                trailingComma: 'all',
+                tabWidth: 4,
+                useTabs: false,
+                printWidth: 100,
+            },
+        ],
 
         // Forbid unused variables and imports
         'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
