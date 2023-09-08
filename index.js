@@ -7,6 +7,7 @@ module.exports = {
         'plugin:jest/recommended',
     ],
     parser: '@typescript-eslint/parser',
+    ignorePatterns: ['jest.config.ts'],
     parserOptions: {
         ecmaVersion: 'latest',
         'project': './tsconfig.json',
